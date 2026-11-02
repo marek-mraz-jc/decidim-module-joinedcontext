@@ -59,8 +59,10 @@ describe "Publish to context space" do
     expect(page).to have_no_content("Saved setting: publishing is off")
     shots("filled")
 
-    perform_enqueued_jobs { click_on "Save" }
-    expect(page).to have_content("Setting saved")
+    perform_enqueued_jobs do
+      click_on "Save"
+      expect(page).to have_content("Setting saved")
+    end
     visit path
     expect(find_by_id("joinedcontext-status")).to have_content("2")
     expect(a_request(:post, JoinedcontextHelpers::UPSERT)).to have_been_requested.at_least_once
