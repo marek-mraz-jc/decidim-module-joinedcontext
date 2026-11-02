@@ -4,7 +4,7 @@ sk:
     attributes:
       decidim/joinedcontext/publication:
         component_types: Čo zverejniť
-        enabled: Zverejniť do kontextového priestoru
+        enabled: Zverejniť tento priestor
         endpoint_name: Cieľový Endpoint
     errors:
       models:
@@ -28,6 +28,7 @@ sk:
               proposals: Návrhy, ich zverejnené stavy a odpovede
             component_types_help: 'Príklad: zaškrtnite Výsledky a zdieľate, čo proces priniesol. Posiela sa len to, čo anonymný návštevník číta na stránke; autori, komentáre, e-maily a telefónne čísla nikdy.'
             enabled_help: Pri každej zmene pošle výstupy tohto priestoru do kontextového priestoru a každú noc ich pošle celé. Po vypnutí sa už nič neposiela a poslané údaje z kontextového priestoru zmiznú do troch dní.
+            endpoint_prompt: Vyberte Endpoint
             endpoint_name_help: 'Kontextový priestor, ktorý údaje prijme, napríklad „Participácia“. Tento zoznam nastavuje váš tím platformy.'
             last_count: Záznamy v poslednej úplnej synchronizácii
             last_error: Posledná chyba
@@ -37,8 +38,11 @@ sk:
             no_error: Žiadna
             private_space: Tento priestor je súkromný, preto sa nedá zverejniť. Najprv ho zmeňte na verejný.
             save: Uložiť
+            state_off: Zverejňovanie je vypnuté. Zapnite ho, vyberte Endpoint, zaškrtnite, čo zverejniť, a uložte.
+            state_on: Zverejňuje sa do %{target}. Zmeny odídu do minúty.
             status: Stav
-            sync_help: Pošle všetko hneď, bez čakania na nočnú synchronizáciu. Stav sa aktualizuje po skončení; načítajte stránku znova.
+            sync_disabled_help: Dostupné po zapnutí a uložení zverejňovania.
+            sync_help: Pošle všetko hneď, bez čakania na nočnú synchronizáciu. O minútu načítajte stránku znova a uvidíte výsledok.
             sync_now: Synchronizovať teraz
             title: Zverejniť do kontextového priestoru
           sync:

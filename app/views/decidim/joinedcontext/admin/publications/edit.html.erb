@@ -6,36 +6,30 @@
 
 <div class="item__edit item__edit-1col">
   <div class="item__edit-form">
+    <% blocked = targets.empty? || private_space? %>
     <% if targets.empty? %>
       <%= cell("decidim/announcement", t(".no_endpoints"), callout_class: "warning") %>
     <% elsif private_space? %>
       <%= cell("decidim/announcement", t(".private_space"), callout_class: "warning") %>
+    <% elsif publication.last_error.present? %>
+      <%= cell("decidim/announcement", publication.last_error, callout_class: "alert") %>
+    <% elsif publication.active? %>
+      <%= cell("decidim/announcement", t(".state_on", target: publication.target.title), callout_class: "success") %>
+    <% else %>
+      <%= cell("decidim/announcement", t(".state_off"), callout_class: "secondary") %>
     <% end %>
 
     <div class="form__wrapper">
       <div class="card pt-4">
         <div class="card-section row column">
           <h2 class="h4"><%= t(".status") %></h2>
-          <div class="table-scroll">
-            <table id="joinedcontext-status" class="table-list">
-              <tbody>
-                <tr>
-                  <th scope="row"><%= t(".last_synced_at") %></th>
-                  <td><%= publication.last_synced_at ? l(publication.last_synced_at, format: :decidim_short) : t(".never") %></td>
-                </tr>
-                <tr>
-                  <th scope="row"><%= t(".last_count") %></th>
-                  <td><%= publication.last_count || "-" %></td>
-                </tr>
-                <tr>
-                  <th scope="row"><%= t(".last_error") %></th>
-                  <td><%= publication.last_error.presence || t(".no_error") %></td>
-                </tr>
-              </tbody>
-            </table>
+          <div id="joinedcontext-status">
+            <p><strong><%= t(".last_synced_at") %>:</strong> <%= publication.last_synced_at ? l(publication.last_synced_at, format: :decidim_short) : t(".never") %></p>
+            <p><strong><%= t(".last_count") %>:</strong> <%= publication.last_count || "-" %></p>
+            <p><strong><%= t(".last_error") %>:</strong> <%= publication.last_error.presence || t(".no_error") %></p>
           </div>
           <%= button_to t(".sync_now"), sync_path, class: "button button__sm button__secondary", disabled: !publication.active?, aria: { describedby: "joinedcontext-sync-help" } %>
-          <p id="joinedcontext-sync-help" class="help-text"><%= t(".sync_help") %></p>
+          <p id="joinedcontext-sync-help" class="help-text"><%= publication.active? ? t(".sync_help") : t(".sync_disabled_help") %></p>
         </div>
       </div>
     </div>
@@ -45,23 +39,23 @@
         <div class="card pt-4">
           <div class="card-section">
             <div class="row column">
-              <%= f.check_box :enabled, disabled: targets.empty? || private_space?, help_text: t(".enabled_help") %>
+              <%= f.check_box :enabled, disabled: blocked, help_text: t(".enabled_help") %>
             </div>
             <div class="row column">
-              <%= f.select :endpoint_name, targets.map { |target| [target.title, target.name] }, { include_blank: true, help_text: t(".endpoint_name_help") }, { disabled: targets.empty? } %>
+              <%= f.select :endpoint_name, targets.map { |target| [target.title, target.name] }, { prompt: t(".endpoint_prompt"), help_text: t(".endpoint_name_help") }, { disabled: blocked } %>
             </div>
             <fieldset class="row column" aria-describedby="joinedcontext-types-help">
-              <legend><%= Decidim::Joinedcontext::Publication.human_attribute_name(:component_types) %></legend>
+              <legend><strong><%= Decidim::Joinedcontext::Publication.human_attribute_name(:component_types) %></strong></legend>
+              <p id="joinedcontext-types-help" class="help-text"><%= t(".component_types_help") %></p>
               <%= hidden_field_tag "publication[component_types][]", "", id: nil %>
               <% Decidim::Joinedcontext::Publication::COMPONENT_TYPES.each do |type| %>
                 <div>
                   <label>
-                    <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}" %>
+                    <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}", disabled: blocked %>
                     <%= t(".component_types.#{type}") %>
                   </label>
                 </div>
               <% end %>
-              <p id="joinedcontext-types-help" class="help-text"><%= t(".component_types_help") %></p>
               <% if publication.errors[:component_types].any? %>
                 <p class="form-error is-visible"><%= publication.errors.full_messages_for(:component_types).to_sentence %></p>
               <% end %>
@@ -71,7 +65,7 @@
       </div>
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
-          <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
+          <%= f.submit t(".save"), class: "button button__sm button__secondary", disabled: blocked %>
         </div>
       </div>
     <% end %>

@@ -45,11 +45,12 @@ describe "Publish to context space" do
   it "turns on, syncs and reports" do
     visit "/en/admin/participatory_processes/#{process.slug}/edit"
     click_on "Publish to context space"
+    expect(page).to have_content("Publishing is off")
     expect(page).to have_content("Not synced yet")
     expect(page).to have_content("for example")
     shots("empty")
 
-    check "Publish to context space"
+    check "Publish this space"
     select "Participation", from: "Target Endpoint"
     check "Results and their progress"
     shots("filled")
@@ -68,7 +69,7 @@ describe "Publish to context space" do
     visit path
     perform_enqueued_jobs { click_on "Sync now" }
     visit path
-    expect(page).to have_content("Ask your platform team to check its Policy")
+    expect(page).to have_css(".flash.alert, .callout.alert, [data-announcement]", text: "Ask your platform team to check its Policy")
     shots("refused")
   end
 
@@ -76,6 +77,8 @@ describe "Publish to context space" do
     process.update!(private_space: true)
     visit path
     expect(page).to have_content("cannot be published")
+    expect(page).to have_button("Save", disabled: true)
+    expect(page).to have_button("Sync now", disabled: true)
     shots("private")
   end
 end

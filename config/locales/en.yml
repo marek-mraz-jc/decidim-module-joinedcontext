@@ -4,7 +4,7 @@ en:
     attributes:
       decidim/joinedcontext/publication:
         component_types: What to publish
-        enabled: Publish to context space
+        enabled: Publish this space
         endpoint_name: Target Endpoint
     errors:
       models:
@@ -28,6 +28,7 @@ en:
               proposals: Proposals, their published states and answers
             component_types_help: 'Example: tick Results to share what the process delivered. Only what anonymous visitors can read on the site is sent; authors, comments, e-mail addresses and phone numbers never are.'
             enabled_help: Sends this space's outputs to the context space on every change, and in full every night. Turned off, nothing more is sent and what was sent leaves the context space within three days.
+            endpoint_prompt: Choose an Endpoint
             endpoint_name_help: 'The context space that receives the data, for example "Participation". Your platform team sets up this list.'
             last_count: Records in the last full sync
             last_error: Last error
@@ -37,8 +38,11 @@ en:
             no_error: None
             private_space: This space is private, so it cannot be published. Make it public first.
             save: Save
+            state_off: Publishing is off. Turn it on, choose an Endpoint, tick what to publish, then save.
+            state_on: Publishing to %{target}. Changes go out within a minute.
             status: Status
-            sync_help: Sends everything now instead of waiting for tonight's sync. The status line updates when it ends; reload the page to read it.
+            sync_disabled_help: Available once publishing is on and saved.
+            sync_help: Sends everything now instead of waiting for tonight's sync. Reload this page in a minute to read the result.
             sync_now: Sync now
             title: Publish to context space
           sync:
