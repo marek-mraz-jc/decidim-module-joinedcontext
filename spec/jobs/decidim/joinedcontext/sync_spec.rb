@@ -4,6 +4,7 @@ require "spec_helper"
 
 describe "publishing" do
   include ActiveJob::TestHelper
+  include ActiveSupport::Testing::TimeHelpers
 
   let(:organization) { create(:organization) }
   let(:process) { create(:participatory_process, :published, organization:) }
@@ -40,6 +41,13 @@ describe "publishing" do
       expect(publication.reload.last_error).to include("Forbidden", "Policy")
     end
 
+    it "writes when each failed run was last tried, the repeat of one error too" do
+      stub_request(:post, JoinedcontextHelpers::UPSERT).to_return(status: 403, body: { title: "Forbidden" }.to_json)
+      travel_to(Time.zone.local(2026, 11, 2, 10)) { described_class.perform_now(publication.id) }
+      travel_to(Time.zone.local(2026, 11, 2, 11)) { described_class.perform_now(publication.id) }
+      expect(publication.reload.last_attempt_at).to eq(Time.zone.local(2026, 11, 2, 11))
+    end
+
     it "retries while the Endpoint is away" do
       stub_request(:post, JoinedcontextHelpers::UPSERT).to_return(status: 503)
       expect { described_class.perform_now(publication.id) }.to have_enqueued_job(described_class)
@@ -61,6 +69,17 @@ describe "publishing" do
       result.destroy!
       described_class.perform_now(publication.id, klass, record_id, id)
       expect(a_request(:post, JoinedcontextHelpers::DELETE).with(body: [id].to_json)).to have_been_requested
+    end
+
+    it "shows no error for an unpublished record the broker never held" do
+      missing = { success: [], errors: [{ entityId: result_id, error: { type: "https://uri.etsi.org/ngsi-ld/errors/ResourceNotFound", title: "Not found" } }] }
+      stub_request(:post, JoinedcontextHelpers::DELETE).to_return(status: 207, body: missing.to_json)
+      id = result_id
+      klass = result.class.name
+      record_id = result.id
+      result.destroy!
+      described_class.perform_now(publication.id, klass, record_id, id)
+      expect(publication.reload.last_error).to be_nil
     end
 
     it "loads no class outside the list" do

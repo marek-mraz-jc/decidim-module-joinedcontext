@@ -84,4 +84,23 @@ describe Decidim::Joinedcontext::Client do
     client.delete_entities([entity["id"]])
     expect(delete).to have_been_requested
   end
+
+  it "counts a delete the broker has no such entity for as gone" do
+    row = { entityId: entity["id"], error: { type: "https://uri.etsi.org/ngsi-ld/errors/ResourceNotFound", title: "Not found" } }
+    stub_request(:post, JoinedcontextHelpers::DELETE).to_return(status: 207, body: { success: [], errors: [row] }.to_json)
+    expect { client.delete_entities([entity["id"]]) }.not_to raise_error
+  end
+
+  it "still fails a delete on any other refused row" do
+    rows = [{ entityId: "urn:ngsi-ld:Result:s:i-2", error: { type: "https://uri.etsi.org/ngsi-ld/errors/ResourceNotFound", title: "Not found" } },
+            { entityId: entity["id"], error: { type: "https://uri.etsi.org/ngsi-ld/errors/AccessDenied", title: "Access denied" } }]
+    stub_request(:post, JoinedcontextHelpers::DELETE).to_return(status: 207, body: { success: [], errors: rows }.to_json)
+    expect { client.delete_entities([entity["id"], "urn:ngsi-ld:Result:s:i-2"]) }.to raise_error(described_class::Error, /1 of 2 records: Access denied/)
+  end
+
+  it "still fails a write on a ResourceNotFound row" do
+    row = { entityId: entity["id"], error: { type: "https://uri.etsi.org/ngsi-ld/errors/ResourceNotFound", title: "Not found" } }
+    stub_request(:post, JoinedcontextHelpers::UPSERT).to_return(status: 207, body: { success: [], errors: [row] }.to_json)
+    expect { client.write_entities([entity]) }.to raise_error(described_class::Error, /1 of 1 records: Not found/)
+  end
 end

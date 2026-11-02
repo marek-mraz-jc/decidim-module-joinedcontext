@@ -53,6 +53,7 @@ describe "Publish to context space" do
     check "Publish this space"
     select "Participation", from: "Target Endpoint"
     check "Results and their progress"
+    expect(page).to have_content("Nothing changes until you press Save")
     shots("filled")
 
     perform_enqueued_jobs { click_on "Save" }
@@ -70,6 +71,7 @@ describe "Publish to context space" do
     perform_enqueued_jobs { click_on "Sync now" }
     visit path
     expect(page).to have_css(".flash.alert, .callout.alert, [data-announcement]", text: "Ask your platform team to check its Policy")
+    expect(find_by_id("joinedcontext-status")).to have_content("Last attempt")
     shots("refused")
   end
 
