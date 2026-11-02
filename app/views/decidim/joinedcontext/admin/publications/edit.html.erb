@@ -26,6 +26,9 @@
           <h2 class="h4"><%= t(".status") %></h2>
           <div id="joinedcontext-status">
             <p><strong><%= t(".last_synced_at") %>:</strong> <%= publication.last_synced_at ? l(publication.last_synced_at, format: :long) : t(".never") %></p>
+            <% if publication.last_error.present? && publication.last_attempt_at %>
+              <p><strong><%= t(".last_attempt_at") %>:</strong> <%= l(publication.last_attempt_at, format: :long) %></p>
+            <% end %>
             <p><strong><%= t(".last_count") %>:</strong> <%= publication.last_count || "-" %></p>
           </div>
           <%= button_to t(".sync_now"), sync_path, class: "button button__sm button__secondary", disabled: !publication.active?, aria: { describedby: "joinedcontext-sync-help" } %>
@@ -60,12 +63,13 @@
                 <p class="form-error is-visible"><%= publication.errors.full_messages_for(:component_types).to_sentence %></p>
               <% end %>
             </fieldset>
+            <p id="joinedcontext-save-help" class="row column help-text"><%= t(".save_help") %></p>
           </div>
         </div>
       </div>
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
-          <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
+          <%= f.submit t(".save"), class: "button button__sm button__secondary", aria: { describedby: "joinedcontext-save-help" } %>
         </div>
       </div>
     <% end %>

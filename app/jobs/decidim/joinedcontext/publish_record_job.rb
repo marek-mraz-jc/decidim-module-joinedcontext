@@ -25,7 +25,7 @@ module Decidim
         end
         publication.update!(last_synced_at: Time.current, last_error: nil)
       rescue Client::Error => e
-        publication.update!(last_error: e.message)
+        publication.update!(last_error: e.message, last_attempt_at: Time.current)
         raise if e.is_a?(Client::Unavailable)
       end
     end

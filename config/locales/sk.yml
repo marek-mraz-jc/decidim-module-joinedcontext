@@ -30,12 +30,14 @@ sk:
             enabled_help: Pri každej zmene pošle výstupy tohto priestoru do kontextového priestoru a každú noc ich pošle celé. Po vypnutí sa už nič neposiela a poslané údaje z kontextového priestoru zmiznú do troch dní.
             endpoint_prompt: Vyberte Endpoint
             endpoint_name_help: 'Kontextový priestor, ktorý údaje prijme, napríklad „Participácia“. Tento zoznam nastavuje váš tím platformy.'
+            last_attempt_at: Posledný pokus
             last_count: Záznamy v poslednej úplnej synchronizácii
             last_synced_at: Posledná synchronizácia
             never: Zatiaľ nesynchronizované
             no_endpoints: Pre túto inštaláciu nie je nastavený žiadny Endpoint, takže sa nedá nič zverejniť. Požiadajte tím platformy o nastavenie JOINEDCONTEXT_ENDPOINTS.
             private_space: Tento priestor je súkromný, preto sa nedá zverejniť. Najprv ho zmeňte na verejný.
             save: Uložiť
+            save_help: Nič sa nezmení, kým nestlačíte Uložiť.
             state_off: Zverejňovanie je vypnuté. Zapnite ho, vyberte Endpoint, zaškrtnite, čo zverejniť, a uložte.
             state_on: Zverejňuje sa do %{target}. Zmeny odídu do minúty.
             status: Stav

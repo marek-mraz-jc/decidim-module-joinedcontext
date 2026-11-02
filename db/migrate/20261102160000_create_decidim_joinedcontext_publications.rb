@@ -10,6 +10,7 @@ class CreateDecidimJoinedcontextPublications < ActiveRecord::Migration[7.2]
       t.datetime :last_synced_at
       t.integer :last_count
       t.string :last_error
+      t.datetime :last_attempt_at
 
       t.timestamps
     end

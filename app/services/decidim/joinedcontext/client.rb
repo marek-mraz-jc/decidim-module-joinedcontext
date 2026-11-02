@@ -35,7 +35,7 @@ module Decidim
       end
 
       def delete_entities(ids)
-        write("entityOperations/delete", ids)
+        write("entityOperations/delete", ids, missing_is_gone: true)
       end
 
       private
@@ -49,7 +49,7 @@ module Decidim
         entities.each_slice((entities.size + 1) / 2) { |part| split(part, &) }
       end
 
-      def write(path, body)
+      def write(path, body, missing_is_gone: false)
         raise Error, I18n.t("decidim.joinedcontext.errors.host") unless target.allowed?
 
         answer = post(path, body, token)
@@ -57,7 +57,7 @@ module Decidim
           TOKENS.delete(client_id)
           answer = post(path, body, token)
         end
-        judge(answer, body.size)
+        judge(answer, body.size, missing_is_gone)
       end
 
       def post(path, body, bearer)
@@ -84,22 +84,28 @@ module Decidim
         body
       end
 
-      def judge(answer, count)
+      def judge(answer, count, missing_is_gone)
         code = answer.code
-        return judge_partial(answer, count) if code == 207
+        return judge_partial(answer, count, missing_is_gone) if code == 207
         return if answer.success?
         raise Unavailable, I18n.t("decidim.joinedcontext.errors.unavailable", code:) if code == 429 || code >= 500
 
         raise Error, I18n.t("decidim.joinedcontext.errors.refused", code:, reason: problem(answer.body))
       end
 
-      # 207: the entities the broker took stay; one it refused fails the run (CIM 009 6.17).
-      def judge_partial(answer, count)
-        refused = Array(parsed(answer.body)["errors"])
+      # 207: the entities the broker took stay; one it refused fails the run (CIM 009 6.17). A delete
+      # of an entity the broker lacks reached its goal: a draft was never published, so it has none.
+      def judge_partial(answer, count, missing_is_gone)
+        refused = Array(parsed(answer.body)["errors"]).map { |row| row_problem(row) }
+        refused = refused.reject { |problem| problem["type"].to_s.end_with?("/ResourceNotFound") } if missing_is_gone
         return if refused.empty?
 
-        reason = refused.first.is_a?(Hash) ? refused.first.dig("error", "title").to_s.first(200) : ""
-        raise Error, I18n.t("decidim.joinedcontext.errors.partial", refused: refused.size, count:, reason:)
+        raise Error, I18n.t("decidim.joinedcontext.errors.partial", refused: refused.size, count:, reason: refused.first["title"].to_s.first(200))
+      end
+
+      def row_problem(row)
+        problem = row.is_a?(Hash) ? row["error"] : nil
+        problem.is_a?(Hash) ? problem : {}
       end
 
       def problem(body)
