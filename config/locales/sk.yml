@@ -1,12 +1,11 @@
 ---
 sk:
-  activemodel:
+  activerecord:
     attributes:
-      publication:
+      decidim/joinedcontext/publication:
         component_types: Čo zverejniť
         enabled: Zverejniť do kontextového priestoru
         endpoint_name: Cieľový Endpoint
-  activerecord:
     errors:
       models:
         decidim/joinedcontext/publication:

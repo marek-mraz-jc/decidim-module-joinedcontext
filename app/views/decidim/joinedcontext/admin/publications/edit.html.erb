@@ -14,16 +14,26 @@
 
     <div class="form__wrapper">
       <div class="card pt-4">
-        <div class="card-section">
+        <div class="card-section row column">
           <h2 class="h4"><%= t(".status") %></h2>
-          <dl id="joinedcontext-status">
-            <dt><%= t(".last_synced_at") %></dt>
-            <dd><%= publication.last_synced_at ? l(publication.last_synced_at, format: :decidim_short) : t(".never") %></dd>
-            <dt><%= t(".last_count") %></dt>
-            <dd><%= publication.last_count || "-" %></dd>
-            <dt><%= t(".last_error") %></dt>
-            <dd><%= publication.last_error.presence || t(".no_error") %></dd>
-          </dl>
+          <div class="table-scroll">
+            <table id="joinedcontext-status" class="table-list">
+              <tbody>
+                <tr>
+                  <th scope="row"><%= t(".last_synced_at") %></th>
+                  <td><%= publication.last_synced_at ? l(publication.last_synced_at, format: :decidim_short) : t(".never") %></td>
+                </tr>
+                <tr>
+                  <th scope="row"><%= t(".last_count") %></th>
+                  <td><%= publication.last_count || "-" %></td>
+                </tr>
+                <tr>
+                  <th scope="row"><%= t(".last_error") %></th>
+                  <td><%= publication.last_error.presence || t(".no_error") %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <%= button_to t(".sync_now"), sync_path, class: "button button__sm button__secondary", disabled: !publication.active?, aria: { describedby: "joinedcontext-sync-help" } %>
           <p id="joinedcontext-sync-help" class="help-text"><%= t(".sync_help") %></p>
         </div>
@@ -41,13 +51,15 @@
               <%= f.select :endpoint_name, targets.map { |target| [target.title, target.name] }, { include_blank: true, help_text: t(".endpoint_name_help") }, { disabled: targets.empty? } %>
             </div>
             <fieldset class="row column" aria-describedby="joinedcontext-types-help">
-              <legend><%= t("activemodel.attributes.publication.component_types") %></legend>
+              <legend><%= Decidim::Joinedcontext::Publication.human_attribute_name(:component_types) %></legend>
               <%= hidden_field_tag "publication[component_types][]", "", id: nil %>
               <% Decidim::Joinedcontext::Publication::COMPONENT_TYPES.each do |type| %>
-                <label>
-                  <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}" %>
-                  <%= t(".component_types.#{type}") %>
-                </label>
+                <div>
+                  <label>
+                    <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}" %>
+                    <%= t(".component_types.#{type}") %>
+                  </label>
+                </div>
               <% end %>
               <p id="joinedcontext-types-help" class="help-text"><%= t(".component_types_help") %></p>
               <% if publication.errors[:component_types].any? %>
