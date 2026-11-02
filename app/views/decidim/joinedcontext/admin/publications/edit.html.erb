@@ -58,7 +58,7 @@
               <%= hidden_field_tag "publication[component_types][]", "", id: nil %>
               <% Decidim::Joinedcontext::Publication::COMPONENT_TYPES.each do |type| %>
                 <div>
-                  <label class="flex gap-2 items-start">
+                  <label>
                     <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}" %>
                     <%= t(".component_types.#{type}") %>
                   </label>
