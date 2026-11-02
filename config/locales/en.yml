@@ -31,11 +31,9 @@ en:
             endpoint_prompt: Choose an Endpoint
             endpoint_name_help: 'The context space that receives the data, for example "Participation". Your platform team sets up this list.'
             last_count: Records in the last full sync
-            last_error: Last error
             last_synced_at: Last sync
             never: Not synced yet
             no_endpoints: No Endpoint is set up for this installation, so nothing can be published. Ask your platform team to set JOINEDCONTEXT_ENDPOINTS.
-            no_error: None
             private_space: This space is private, so it cannot be published. Make it public first.
             save: Save
             state_off: Publishing is off. Turn it on, choose an Endpoint, tick what to publish, then save.

@@ -31,11 +31,9 @@ sk:
             endpoint_prompt: Vyberte Endpoint
             endpoint_name_help: 'Kontextový priestor, ktorý údaje prijme, napríklad „Participácia“. Tento zoznam nastavuje váš tím platformy.'
             last_count: Záznamy v poslednej úplnej synchronizácii
-            last_error: Posledná chyba
             last_synced_at: Posledná synchronizácia
             never: Zatiaľ nesynchronizované
             no_endpoints: Pre túto inštaláciu nie je nastavený žiadny Endpoint, takže sa nedá nič zverejniť. Požiadajte tím platformy o nastavenie JOINEDCONTEXT_ENDPOINTS.
-            no_error: Žiadna
             private_space: Tento priestor je súkromný, preto sa nedá zverejniť. Najprv ho zmeňte na verejný.
             save: Uložiť
             state_off: Zverejňovanie je vypnuté. Zapnite ho, vyberte Endpoint, zaškrtnite, čo zverejniť, a uložte.

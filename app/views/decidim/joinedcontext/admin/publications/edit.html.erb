@@ -19,14 +19,14 @@
       <%= cell("decidim/announcement", t(".state_off"), callout_class: "secondary") %>
     <% end %>
 
+    <% unless blocked %>
     <div class="form__wrapper">
       <div class="card pt-4">
         <div class="card-section row column">
           <h2 class="h4"><%= t(".status") %></h2>
           <div id="joinedcontext-status">
-            <p><strong><%= t(".last_synced_at") %>:</strong> <%= publication.last_synced_at ? l(publication.last_synced_at, format: :decidim_short) : t(".never") %></p>
+            <p><strong><%= t(".last_synced_at") %>:</strong> <%= publication.last_synced_at ? l(publication.last_synced_at, format: :long) : t(".never") %></p>
             <p><strong><%= t(".last_count") %>:</strong> <%= publication.last_count || "-" %></p>
-            <p><strong><%= t(".last_error") %>:</strong> <%= publication.last_error.presence || t(".no_error") %></p>
           </div>
           <%= button_to t(".sync_now"), sync_path, class: "button button__sm button__secondary", disabled: !publication.active?, aria: { describedby: "joinedcontext-sync-help" } %>
           <p id="joinedcontext-sync-help" class="help-text"><%= publication.active? ? t(".sync_help") : t(".sync_disabled_help") %></p>
@@ -39,10 +39,10 @@
         <div class="card pt-4">
           <div class="card-section">
             <div class="row column">
-              <%= f.check_box :enabled, disabled: blocked, help_text: t(".enabled_help") %>
+              <%= f.check_box :enabled, help_text: t(".enabled_help") %>
             </div>
             <div class="row column">
-              <%= f.select :endpoint_name, targets.map { |target| [target.title, target.name] }, { prompt: t(".endpoint_prompt"), help_text: t(".endpoint_name_help") }, { disabled: blocked } %>
+              <%= f.select :endpoint_name, targets.map { |target| [target.title, target.name] }, { prompt: t(".endpoint_prompt"), help_text: t(".endpoint_name_help") } %>
             </div>
             <fieldset class="row column" aria-describedby="joinedcontext-types-help">
               <legend><strong><%= Decidim::Joinedcontext::Publication.human_attribute_name(:component_types) %></strong></legend>
@@ -51,7 +51,7 @@
               <% Decidim::Joinedcontext::Publication::COMPONENT_TYPES.each do |type| %>
                 <div>
                   <label>
-                    <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}", disabled: blocked %>
+                    <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}" %>
                     <%= t(".component_types.#{type}") %>
                   </label>
                 </div>
@@ -65,9 +65,10 @@
       </div>
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
-          <%= f.submit t(".save"), class: "button button__sm button__secondary", disabled: blocked %>
+          <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
         </div>
       </div>
+    <% end %>
     <% end %>
   </div>
 </div>

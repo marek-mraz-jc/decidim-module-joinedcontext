@@ -77,8 +77,8 @@ describe "Publish to context space" do
     process.update!(private_space: true)
     visit path
     expect(page).to have_content("cannot be published")
-    expect(page).to have_button("Save", disabled: true)
-    expect(page).to have_button("Sync now", disabled: true)
+    expect(page).to have_no_button("Save")
+    expect(page).to have_no_button("Sync now")
     shots("private")
   end
 end
