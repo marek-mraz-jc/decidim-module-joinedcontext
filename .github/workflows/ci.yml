@@ -54,3 +54,11 @@ jobs:
       - run: bundle exec rails db:create db:migrate
         working-directory: spec/decidim_dummy_app
       - run: bundle exec rspec
+        env:
+          SHOTS_DIR: ${{ github.workspace }}/shots
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: shots
+          path: shots
+          if-no-files-found: ignore

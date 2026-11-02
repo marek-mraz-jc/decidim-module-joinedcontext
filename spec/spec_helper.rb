@@ -11,7 +11,7 @@ require "webmock/rspec"
 module JoinedcontextHelpers
   GATEWAY = "gateway.example.org"
   ENDPOINT = "https://#{GATEWAY}/api/endpoint/abc234".freeze
-  TOKEN_URL = "https://sso.example.org/realms/r/protocol/openid-connect/token".freeze
+  TOKEN_URL = "https://sso.example.org/realms/r/protocol/openid-connect/token"
   UPSERT = "#{ENDPOINT}/ngsi-ld/v1/entityOperations/upsert?options=update".freeze
   DELETE = "#{ENDPOINT}/ngsi-ld/v1/entityOperations/delete".freeze
   TARGET = {
