@@ -45,7 +45,7 @@ describe "Publish to context space" do
   it "turns on, syncs and reports" do
     visit "/en/admin/participatory_processes/#{process.slug}/edit"
     click_on "Publish to context space"
-    expect(page).to have_content("Publishing is off")
+    expect(page).to have_content("Saved setting: publishing is off")
     expect(page).to have_content("Not synced yet")
     expect(page).to have_content("for example")
     shots("empty")

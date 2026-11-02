@@ -38,7 +38,7 @@ sk:
             private_space: Tento priestor je súkromný, preto sa nedá zverejniť. Najprv ho zmeňte na verejný.
             save: Uložiť
             save_help: Nič sa nezmení, kým nestlačíte Uložiť.
-            state_off: Zverejňovanie je vypnuté. Zapnite ho, vyberte Endpoint, zaškrtnite, čo zverejniť, a uložte.
+            state_off: "Uložené nastavenie: zverejňovanie je vypnuté. Zapnite ho, vyberte Endpoint, zaškrtnite, čo zverejniť, a uložte."
             state_on: Zverejňuje sa do %{target}. Zmeny odídu do minúty.
             status: Stav
             sync_disabled_help: Dostupné po zapnutí a uložení zverejňovania.

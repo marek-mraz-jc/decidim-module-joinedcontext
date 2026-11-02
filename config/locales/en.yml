@@ -38,7 +38,7 @@ en:
             private_space: This space is private, so it cannot be published. Make it public first.
             save: Save
             save_help: Nothing changes until you press Save.
-            state_off: Publishing is off. Turn it on, choose an Endpoint, tick what to publish, then save.
+            state_off: "Saved setting: publishing is off. Turn it on, choose an Endpoint, tick what to publish, then save."
             state_on: Publishing to %{target}. Changes go out within a minute.
             status: Status
             sync_disabled_help: Available once publishing is on and saved.

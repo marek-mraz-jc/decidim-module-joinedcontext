@@ -63,12 +63,12 @@
                 <p class="form-error is-visible"><%= publication.errors.full_messages_for(:component_types).to_sentence %></p>
               <% end %>
             </fieldset>
-            <p id="joinedcontext-save-help" class="row column help-text"><%= t(".save_help") %></p>
           </div>
         </div>
       </div>
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
+          <span id="joinedcontext-save-help" class="text-white font-semibold my-auto mr-4"><%= t(".save_help") %></span>
           <%= f.submit t(".save"), class: "button button__sm button__secondary", aria: { describedby: "joinedcontext-save-help" } %>
         </div>
       </div>
