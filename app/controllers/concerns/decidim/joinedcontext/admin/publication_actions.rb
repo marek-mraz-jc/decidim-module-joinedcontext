@@ -8,7 +8,7 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          before_action :same_organization, :authorize_publication
+          before_action :same_organization
           helper_method :publication, :targets, :publication_path, :sync_path, :private_space?
         end
 
@@ -18,9 +18,12 @@ module Decidim
           end
         end
 
-        def edit; end
+        def edit
+          enforce_permission_to(*publication_permission)
+        end
 
         def update
+          enforce_permission_to(*publication_permission)
           publication.assign_attributes(publication_params)
           if publication.save
             Rails.logger.info("joinedcontext: user #{current_user.id} set publication #{publication.id}")
@@ -29,11 +32,12 @@ module Decidim
             redirect_to publication_path
           else
             flash.now[:alert] = t("decidim.joinedcontext.admin.publications.update.error")
-            render :edit, status: :unprocessable_entity
+            render :edit, status: :unprocessable_content
           end
         end
 
         def sync
+          enforce_permission_to(*publication_permission)
           if publication.active?
             SyncJob.perform_later(publication.id)
             flash[:notice] = t("decidim.joinedcontext.admin.publications.sync.success")

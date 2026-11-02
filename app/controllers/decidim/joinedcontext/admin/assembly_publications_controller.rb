@@ -9,8 +9,8 @@ module Decidim
 
         private
 
-        def authorize_publication
-          enforce_permission_to :update, :assembly, assembly: current_participatory_space
+        def publication_permission
+          [:update, :assembly, { assembly: current_participatory_space }]
         end
 
         def publication_path

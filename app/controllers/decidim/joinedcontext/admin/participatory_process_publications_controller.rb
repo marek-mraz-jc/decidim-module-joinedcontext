@@ -9,8 +9,8 @@ module Decidim
 
         private
 
-        def authorize_publication
-          enforce_permission_to :update, :process, process: current_participatory_space
+        def publication_permission
+          [:update, :process, { process: current_participatory_space }]
         end
 
         def publication_path

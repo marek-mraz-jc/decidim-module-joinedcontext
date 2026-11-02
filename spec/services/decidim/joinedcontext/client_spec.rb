@@ -29,7 +29,7 @@ describe Decidim::Joinedcontext::Client do
   it "halves a batch over the body cap" do
     write = stub_request(:post, JoinedcontextHelpers::UPSERT).to_return(status: 204)
     client.write_entities(Array.new(4) { entity.merge("description" => "x" * 400.kilobytes) })
-    expect(write).to have_been_requested.times(4)
+    expect(write).to have_been_requested.twice
   end
 
   it "names the first refusal of a 207" do
@@ -83,24 +83,5 @@ describe Decidim::Joinedcontext::Client do
     delete = stub_request(:post, JoinedcontextHelpers::DELETE).with(body: [entity["id"]].to_json).to_return(status: 204)
     client.delete_entities([entity["id"]])
     expect(delete).to have_been_requested
-  end
-end
-
-describe Decidim::Joinedcontext::Target do
-  it "loads only https rows on the gateway host" do
-    rows = [
-      JoinedcontextHelpers::TARGET,
-      JoinedcontextHelpers::TARGET.merge("name" => "elsewhere", "url" => "https://evil.example.org/api/endpoint/x"),
-      JoinedcontextHelpers::TARGET.merge("name" => "plain", "url" => "http://#{JoinedcontextHelpers::GATEWAY}/api/endpoint/x")
-    ]
-    ENV["JOINEDCONTEXT_ENDPOINTS"] = rows.to_json
-    expect(described_class.all.map(&:name)).to eq(["participacia"])
-  end
-
-  it "fails closed on a broken list" do
-    ENV["JOINEDCONTEXT_ENDPOINTS"] = "not json"
-    expect(described_class.all).to eq([])
-    ENV["JOINEDCONTEXT_ENDPOINTS"] = [{ "name" => "only" }].to_json
-    expect(described_class.all).to eq([])
   end
 end

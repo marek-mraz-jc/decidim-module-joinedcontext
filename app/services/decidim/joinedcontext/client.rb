@@ -9,6 +9,7 @@ module Decidim
     class Client
       # What an admin reads in the status line; never holds a token or the client secret.
       class Error < StandardError; end
+
       # The Endpoint or the realm is away for now; the job tries again.
       class Unavailable < Error; end
 

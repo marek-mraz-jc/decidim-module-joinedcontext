@@ -35,37 +35,37 @@ describe "the publication setting" do
     it_behaves_like "refused"
   end
 
-  context "as a citizen" do
+  context "with a citizen" do
     before { sign_in create(:user, :confirmed, organization:) }
 
     it_behaves_like "refused"
   end
 
-  context "as a process moderator" do
+  context "with a process moderator" do
     before { sign_in_admin create(:process_moderator, participatory_process: process, organization:) }
 
     it_behaves_like "refused"
   end
 
-  context "as a process collaborator" do
+  context "with a process collaborator" do
     before { sign_in_admin create(:process_collaborator, participatory_process: process, organization:) }
 
     it_behaves_like "refused"
   end
 
-  context "as the admin of another process" do
+  context "with the admin of another process" do
     before { sign_in_admin create(:process_admin, participatory_process: create(:participatory_process, organization:), organization:) }
 
     it_behaves_like "refused"
   end
 
-  context "as an admin of another organization" do
+  context "with an admin of another organization" do
     before { sign_in create(:user, :admin, :confirmed, organization: create(:organization)) }
 
     it_behaves_like "refused"
   end
 
-  context "as the process admin" do
+  context "with the process admin" do
     before { sign_in_admin create(:process_admin, participatory_process: process, organization:) }
 
     it "offers the listed Endpoints with hints and a status line" do
@@ -91,7 +91,7 @@ describe "the publication setting" do
     it "checks the submitted Endpoint again and names the field" do
       params[:publication][:endpoint_name] = "https://evil.example.org"
       patch(path, params:)
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(response.body).to include("Choose one of the listed Endpoints")
       expect(Decidim::Joinedcontext::Publication.count).to eq(0)
     end
@@ -99,7 +99,7 @@ describe "the publication setting" do
     it "refuses an unknown component type" do
       params[:publication][:component_types] = ["surveys"]
       patch(path, params:)
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it "queues Sync now, and refuses it while off" do
@@ -110,7 +110,7 @@ describe "the publication setting" do
     end
   end
 
-  context "as an assembly admin" do
+  context "with an assembly admin" do
     let(:assembly) { create(:assembly, :published, organization:) }
 
     before { sign_in_admin create(:assembly_admin, assembly:, organization:) }

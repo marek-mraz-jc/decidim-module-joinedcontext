@@ -15,8 +15,9 @@ module Decidim
 
         mapper = Mapper.new(publication)
         client = Client.new(publication.target)
-        record = class_name.constantize.find_by(id: record_id) if Mapper::TYPES.key?(class_name)
-        return if record.nil? && !Mapper::TYPES.key?(class_name)
+        return unless Mapper::TYPES.has_key?(class_name)
+
+        record = class_name.constantize.find_by(id: record_id)
         if record && mapper.publishable?(record)
           client.write_entities([mapper.entity(record)])
         else

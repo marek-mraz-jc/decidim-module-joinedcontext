@@ -21,7 +21,7 @@ describe "Publish to context space" do
       page.current_window.resize_to(width, 900)
       height = page.evaluate_script("document.documentElement.scrollHeight")
       page.current_window.resize_to(width, height)
-      page.save_screenshot(File.expand_path("#{dir}/#{state}-#{width}.png"))
+      page.save_screenshot(File.expand_path("#{dir}/#{state}-#{width}.png")) # rubocop:disable Lint/Debugger
     end
     page.current_window.resize_to(1440, 900)
   end

@@ -24,11 +24,11 @@ module Decidim
       LONGITUDES = (16.8..22.6)
 
       def self.known?(record)
-        TYPES.key?(record.class.name)
+        TYPES.has_key?(record.class.name)
       end
 
       def self.space?(record)
-        PATHS.key?(record.class.name)
+        PATHS.has_key?(record.class.name)
       end
 
       def initialize(publication)
