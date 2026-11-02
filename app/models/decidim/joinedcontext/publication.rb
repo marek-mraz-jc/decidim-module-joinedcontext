@@ -53,7 +53,8 @@ module Decidim
         component_types.include?(manifest_name)
       end
 
-      # Every record of a full pass, the space first: a Relationship to an Entity the broker lacks is refused.
+      # Every record of a full pass, the space first and a parent before its child: a Relationship to an
+      # Entity the broker lacks is refused (SyncJob keeps them in separate batches).
       def records
         Enumerator.new do |out|
           out << participatory_space

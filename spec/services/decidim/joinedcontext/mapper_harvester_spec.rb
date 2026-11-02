@@ -33,7 +33,7 @@ describe Decidim::Joinedcontext::Mapper do
   it "agrees on a result" do
     component = create(:accountability_component, id: 902, participatory_space: process)
     status = create(:status, component:, name: { en: "Prebieha" })
-    result = create(:result, id: 903, component:, status:, progress: 40.5, title: { en: "Nové lavičky" }, description: { en: "<p>Napíšte na info@mesto.sk alebo +421905123456.</p>" },
+    result = create(:result, id: 903, component:, status:, progress: 40.5, title: { en: "Nové lavičky" }, description: { en: "<p>Napíšte na info@mesto.sk alebo +421905123456 či +421 905 123 456.</p>" },
                              start_date: Date.new(2026, 3, 1), end_date: Date.new(2026, 9, 1))
     result.update_columns(reference: "R-903") # rubocop:disable Rails/SkipsModelValidations
     expect_same(result, "result", "2026-10-02T06:30:00Z")

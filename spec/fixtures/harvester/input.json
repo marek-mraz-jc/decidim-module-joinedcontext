@@ -11,7 +11,7 @@
     "process": { "kind": "process" },
     "result": {
       "kind": "accountability", "id": "903", "reference": "R-903", "updatedAt": "2026-10-02T08:30:00+02:00", "progress": 40.5,
-      "title": { "translation": "Nové lavičky" }, "description": { "translation": "<p>Napíšte na info@mesto.sk alebo +421905123456.</p>" },
+      "title": { "translation": "Nové lavičky" }, "description": { "translation": "<p>Napíšte na info@mesto.sk alebo +421905123456 či +421 905 123 456.</p>" },
       "startDate": "2026-03-01", "endDate": "2026-09-01", "status": { "name": { "translation": "Prebieha" } }
     },
     "proposal": {
