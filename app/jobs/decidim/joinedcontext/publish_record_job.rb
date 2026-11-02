@@ -18,9 +18,9 @@ module Decidim
         record = class_name.constantize.find_by(id: record_id) if Mapper::TYPES.key?(class_name)
         return if record.nil? && !Mapper::TYPES.key?(class_name)
         if record && mapper.publishable?(record)
-          client.upsert([mapper.entity(record)])
+          client.write_entities([mapper.entity(record)])
         else
-          client.delete([entity_id])
+          client.delete_entities([entity_id])
         end
         publication.update!(last_synced_at: Time.current, last_error: nil)
       rescue Client::Error => e

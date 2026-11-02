@@ -29,11 +29,11 @@ module Decidim
         @target = target
       end
 
-      def upsert(entities)
+      def write_entities(entities)
         split(entities) { |part| write("entityOperations/upsert?options=update", part) }
       end
 
-      def delete(ids)
+      def delete_entities(ids)
         write("entityOperations/delete", ids)
       end
 

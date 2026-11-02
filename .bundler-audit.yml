@@ -1,0 +1,5 @@
+---
+ignore:
+  # Test bundle only: decidim-core 0.32.2 declares rubyzip ~> 2.0, so this lockfile cannot move. This gem
+  # does not depend on rubyzip, and the deployment's image build widens that range to 3.x (T-6448).
+  - CVE-2026-85396

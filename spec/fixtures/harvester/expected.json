@@ -1,0 +1,347 @@
+{
+  "meeting": {
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressCountry": "SK",
+        "addressLocality": "Banská Bystrica",
+        "streetAddress": "Radnica, Veľká sála"
+      }
+    },
+    "closed": {
+      "type": "Property",
+      "value": true
+    },
+    "dataProvider": {
+      "type": "Property",
+      "value": "Mesto Banská Bystrica"
+    },
+    "dateModified": {
+      "type": "Property",
+      "value": "2026-10-05T08:30:00Z"
+    },
+    "description": {
+      "type": "Property",
+      "value": "O lavičkách"
+    },
+    "endDate": {
+      "type": "Property",
+      "value": "2026-05-01T18:00:00Z"
+    },
+    "expiresAt": "2026-11-05T16:37:01Z",
+    "id": "urn:ngsi-ld:Meeting:participacia:mesto-907",
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "coordinates": [
+          19.1,
+          48.7
+        ],
+        "type": "Point"
+      }
+    },
+    "meetingType": {
+      "type": "Property",
+      "value": "hybrid"
+    },
+    "name": {
+      "type": "Property",
+      "value": "Verejné stretnutie"
+    },
+    "onlineUrl": {
+      "type": "Property",
+      "value": "https://meet.example.org/a"
+    },
+    "refParticipatoryProcess": {
+      "object": "urn:ngsi-ld:ParticipatoryProcess:participacia:mesto-p901",
+      "type": "Relationship"
+    },
+    "reference": {
+      "type": "Property",
+      "value": "M-907"
+    },
+    "scope": "/SK/BB/banska_bystrica",
+    "source": {
+      "type": "Property",
+      "value": "https://participacia.example.org"
+    },
+    "sourceId": {
+      "type": "Property",
+      "value": "907"
+    },
+    "startDate": {
+      "type": "Property",
+      "value": "2026-05-01T16:00:00Z"
+    },
+    "type": "Meeting",
+    "url": {
+      "type": "Property",
+      "value": "https://participacia.example.org/processes/lavicky/f/902/meetings/907"
+    }
+  },
+  "process": {
+    "activeStep": {
+      "type": "Property",
+      "value": "Hlasovanie"
+    },
+    "dataProvider": {
+      "type": "Property",
+      "value": "Mesto Banská Bystrica"
+    },
+    "dateModified": {
+      "type": "Property",
+      "value": "2026-10-01T10:00:00Z"
+    },
+    "description": {
+      "type": "Property",
+      "value": "Kde pribudnú lavičky"
+    },
+    "endDate": {
+      "type": "Property",
+      "value": "2099-12-31"
+    },
+    "expiresAt": "2026-11-05T16:36:57Z",
+    "id": "urn:ngsi-ld:ParticipatoryProcess:participacia:mesto-p901",
+    "name": {
+      "type": "Property",
+      "value": "Lavičky pre mesto"
+    },
+    "processType": {
+      "type": "Property",
+      "value": "process"
+    },
+    "reference": {
+      "type": "Property",
+      "value": "P-901"
+    },
+    "scope": "/SK/BB/banska_bystrica",
+    "source": {
+      "type": "Property",
+      "value": "https://participacia.example.org"
+    },
+    "sourceId": {
+      "type": "Property",
+      "value": "901"
+    },
+    "startDate": {
+      "type": "Property",
+      "value": "2026-01-01"
+    },
+    "status": {
+      "type": "Property",
+      "value": "active"
+    },
+    "steps": {
+      "type": "Property",
+      "value": [
+        {
+          "active": true,
+          "endDate": "2099-12-31T10:00:00Z",
+          "startDate": "2026-01-01T10:00:00Z",
+          "title": "Hlasovanie"
+        }
+      ]
+    },
+    "type": "ParticipatoryProcess",
+    "url": {
+      "type": "Property",
+      "value": "https://participacia.example.org/processes/lavicky"
+    }
+  },
+  "project": {
+    "budgetAmount": {
+      "type": "Property",
+      "value": 1200
+    },
+    "budgetName": {
+      "type": "Property",
+      "value": "Rozpočet 2026"
+    },
+    "budgetTotal": {
+      "type": "Property",
+      "value": 50000
+    },
+    "dataProvider": {
+      "type": "Property",
+      "value": "Mesto Banská Bystrica"
+    },
+    "dateModified": {
+      "type": "Property",
+      "value": "2026-10-04T08:30:00Z"
+    },
+    "description": {
+      "type": "Property",
+      "value": "Nový park"
+    },
+    "expiresAt": "2026-11-05T16:37:00Z",
+    "id": "urn:ngsi-ld:BudgetProject:participacia:mesto-905",
+    "name": {
+      "type": "Property",
+      "value": "Park"
+    },
+    "refParticipatoryProcess": {
+      "object": "urn:ngsi-ld:ParticipatoryProcess:participacia:mesto-p901",
+      "type": "Relationship"
+    },
+    "reference": {
+      "type": "Property",
+      "value": "B-905"
+    },
+    "scope": "/SK/BB/banska_bystrica",
+    "selected": {
+      "type": "Property",
+      "value": true
+    },
+    "source": {
+      "type": "Property",
+      "value": "https://participacia.example.org"
+    },
+    "sourceId": {
+      "type": "Property",
+      "value": "905"
+    },
+    "type": "BudgetProject",
+    "url": {
+      "type": "Property",
+      "value": "https://participacia.example.org/processes/lavicky/f/902/budgets/906/projects/905"
+    }
+  },
+  "proposal": {
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressCountry": "SK",
+        "addressLocality": "Banská Bystrica",
+        "streetAddress": "Námestie 1"
+      }
+    },
+    "dataProvider": {
+      "type": "Property",
+      "value": "Mesto Banská Bystrica"
+    },
+    "dateCreated": {
+      "type": "Property",
+      "value": "2026-09-01T08:00:00Z"
+    },
+    "dateModified": {
+      "type": "Property",
+      "value": "2026-10-03T08:30:00Z"
+    },
+    "description": {
+      "type": "Property",
+      "value": "Chodník pri škole"
+    },
+    "endorsementsCount": {
+      "type": "Property",
+      "value": 2
+    },
+    "expiresAt": "2026-11-05T16:36:59Z",
+    "id": "urn:ngsi-ld:Proposal:participacia:mesto-904",
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "coordinates": [
+          19.1,
+          48.7
+        ],
+        "type": "Point"
+      }
+    },
+    "name": {
+      "type": "Property",
+      "value": "Oprava chodníka"
+    },
+    "official": {
+      "type": "Property",
+      "value": false
+    },
+    "proposalState": {
+      "type": "Property",
+      "value": "accepted"
+    },
+    "refParticipatoryProcess": {
+      "object": "urn:ngsi-ld:ParticipatoryProcess:participacia:mesto-p901",
+      "type": "Relationship"
+    },
+    "reference": {
+      "type": "Property",
+      "value": "N-904"
+    },
+    "scope": "/SK/BB/banska_bystrica",
+    "source": {
+      "type": "Property",
+      "value": "https://participacia.example.org"
+    },
+    "sourceId": {
+      "type": "Property",
+      "value": "904"
+    },
+    "type": "Proposal",
+    "url": {
+      "type": "Property",
+      "value": "https://participacia.example.org/processes/lavicky/f/902/proposals/904"
+    },
+    "voteCount": {
+      "type": "Property",
+      "value": 7
+    }
+  },
+  "result": {
+    "dataProvider": {
+      "type": "Property",
+      "value": "Mesto Banská Bystrica"
+    },
+    "dateModified": {
+      "type": "Property",
+      "value": "2026-10-02T06:30:00Z"
+    },
+    "description": {
+      "type": "Property",
+      "value": "Napíšte na alebo ."
+    },
+    "endDate": {
+      "type": "Property",
+      "value": "2026-09-01"
+    },
+    "expiresAt": "2026-11-05T16:36:58Z",
+    "id": "urn:ngsi-ld:Result:participacia:mesto-903",
+    "name": {
+      "type": "Property",
+      "value": "Nové lavičky"
+    },
+    "progress": {
+      "type": "Property",
+      "value": 40.5
+    },
+    "refParticipatoryProcess": {
+      "object": "urn:ngsi-ld:ParticipatoryProcess:participacia:mesto-p901",
+      "type": "Relationship"
+    },
+    "reference": {
+      "type": "Property",
+      "value": "R-903"
+    },
+    "resultStatus": {
+      "type": "Property",
+      "value": "Prebieha"
+    },
+    "scope": "/SK/BB/banska_bystrica",
+    "source": {
+      "type": "Property",
+      "value": "https://participacia.example.org"
+    },
+    "sourceId": {
+      "type": "Property",
+      "value": "903"
+    },
+    "startDate": {
+      "type": "Property",
+      "value": "2026-03-01"
+    },
+    "type": "Result",
+    "url": {
+      "type": "Property",
+      "value": "https://participacia.example.org/processes/lavicky/f/902/results/903"
+    }
+  }
+}

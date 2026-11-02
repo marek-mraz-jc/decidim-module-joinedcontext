@@ -17,7 +17,7 @@ module Decidim
         client = Client.new(publication.target)
         count = 0
         publication.records.lazy.select { |record| mapper.publishable?(record) }.each_slice(Client::BATCH) do |records|
-          client.upsert(records.map { |record| mapper.entity(record) })
+          client.write_entities(records.map { |record| mapper.entity(record) })
           count += records.size
         end
         publication.update!(last_synced_at: Time.current, last_count: count, last_error: nil)
