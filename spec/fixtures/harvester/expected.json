@@ -28,7 +28,7 @@
       "type": "Property",
       "value": "2026-05-01T18:00:00Z"
     },
-    "expiresAt": "2026-11-05T16:37:01Z",
+    "expiresAt": "2026-11-05T21:57:00Z",
     "id": "urn:ngsi-ld:Meeting:participacia:mesto-907",
     "location": {
       "type": "GeoProperty",
@@ -100,7 +100,7 @@
       "type": "Property",
       "value": "2099-12-31"
     },
-    "expiresAt": "2026-11-05T16:36:57Z",
+    "expiresAt": "2026-11-05T21:56:56Z",
     "id": "urn:ngsi-ld:ParticipatoryProcess:participacia:mesto-p901",
     "name": {
       "type": "Property",
@@ -173,7 +173,7 @@
       "type": "Property",
       "value": "Nový park"
     },
-    "expiresAt": "2026-11-05T16:37:00Z",
+    "expiresAt": "2026-11-05T21:56:59Z",
     "id": "urn:ngsi-ld:BudgetProject:participacia:mesto-905",
     "name": {
       "type": "Property",
@@ -235,7 +235,7 @@
       "type": "Property",
       "value": 2
     },
-    "expiresAt": "2026-11-05T16:36:59Z",
+    "expiresAt": "2026-11-05T21:56:58Z",
     "id": "urn:ngsi-ld:Proposal:participacia:mesto-904",
     "location": {
       "type": "GeoProperty",
@@ -297,13 +297,13 @@
     },
     "description": {
       "type": "Property",
-      "value": "Napíšte na alebo ."
+      "value": "Napíšte na alebo či ."
     },
     "endDate": {
       "type": "Property",
       "value": "2026-09-01"
     },
-    "expiresAt": "2026-11-05T16:36:58Z",
+    "expiresAt": "2026-11-05T21:56:57Z",
     "id": "urn:ngsi-ld:Result:participacia:mesto-903",
     "name": {
       "type": "Property",
