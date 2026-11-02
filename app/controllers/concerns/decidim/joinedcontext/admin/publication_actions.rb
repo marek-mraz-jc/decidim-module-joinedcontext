@@ -9,7 +9,7 @@ module Decidim
 
         included do
           before_action :same_organization
-          helper_method :publication, :targets, :publication_path, :sync_path, :private_space?
+          helper_method :publication, :targets, :update_path, :sync_path, :private_space?
         end
 
         class_methods do
@@ -29,7 +29,7 @@ module Decidim
             Rails.logger.info("joinedcontext: user #{current_user.id} set publication #{publication.id}")
             SyncJob.perform_later(publication.id) if publication.active?
             flash[:notice] = t("decidim.joinedcontext.admin.publications.update.success")
-            redirect_to publication_path
+            redirect_to edit_path
           else
             flash.now[:alert] = t("decidim.joinedcontext.admin.publications.update.error")
             render :edit, status: :unprocessable_content
@@ -44,7 +44,7 @@ module Decidim
           else
             flash[:alert] = t("decidim.joinedcontext.admin.publications.sync.inactive")
           end
-          redirect_to publication_path
+          redirect_to edit_path
         end
 
         private

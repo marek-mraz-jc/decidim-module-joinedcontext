@@ -13,8 +13,12 @@ module Decidim
           [:update, :process, { process: current_participatory_space }]
         end
 
-        def publication_path
+        def edit_path
           decidim_admin_joinedcontext.edit_process_publication_path(participatory_process_slug: current_participatory_space.slug)
+        end
+
+        def update_path
+          decidim_admin_joinedcontext.process_publication_path(participatory_process_slug: current_participatory_space.slug)
         end
 
         def sync_path

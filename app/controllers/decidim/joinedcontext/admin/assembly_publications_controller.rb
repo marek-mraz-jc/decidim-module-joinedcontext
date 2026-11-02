@@ -13,8 +13,12 @@ module Decidim
           [:update, :assembly, { assembly: current_participatory_space }]
         end
 
-        def publication_path
+        def edit_path
           decidim_admin_joinedcontext.edit_assembly_publication_path(assembly_slug: current_participatory_space.slug)
+        end
+
+        def update_path
+          decidim_admin_joinedcontext.assembly_publication_path(assembly_slug: current_participatory_space.slug)
         end
 
         def sync_path

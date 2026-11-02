@@ -1,5 +1,7 @@
 ---
 ignore:
-  # Test bundle only: decidim-core 0.32.2 declares rubyzip ~> 2.0, so this lockfile cannot move. This gem
-  # does not depend on rubyzip, and the deployment's image build widens that range to 3.x (T-6448).
+  # Test bundle only, both pinned by decidim-core 0.32.2 (rubyzip ~> 2.0, rack-proxy ~> 0.8.3), so this
+  # lockfile cannot move. This gem depends on neither. The deployment's image build widens rubyzip to
+  # 3.x (T-6448); rack-proxy serves only Shakapacker's development proxy (noted for the image in T-6458).
   - CVE-2026-85396
+  - GHSA-42qh-8mx8-7wqm
