@@ -38,6 +38,7 @@ en:
             private_space: This space is private, so it cannot be published. Make it public first.
             save: Save
             save_help: Nothing changes until you press Save.
+            save_unsaved: Unsaved changes. Press Save to apply them.
             state_off: "Saved setting: publishing is off. Turn it on, choose an Endpoint, tick what to publish, then save."
             state_on: Publishing to %{target}. Changes go out within a minute.
             status: Status
@@ -45,6 +46,7 @@ en:
             sync_help: Sends everything now instead of waiting for tonight's sync. Reload this page in a minute to read the result.
             sync_now: Sync now
             title: Publish to context space
+            unsaved: You have unsaved changes. They take effect when you press Save.
           sync:
             inactive: Turn publishing on and choose an Endpoint first.
             success: Sync queued. Reload this page in a minute to read the result.

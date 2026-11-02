@@ -47,13 +47,16 @@ describe "Publish to context space" do
     click_on "Publish to context space"
     expect(page).to have_content("Saved setting: publishing is off")
     expect(page).to have_content("Not synced yet")
+    expect(page).to have_content("Nothing changes until you press Save")
     expect(page).to have_content("for example")
     shots("empty")
 
     check "Publish this space"
     select "Participation", from: "Target Endpoint"
     check "Results and their progress"
-    expect(page).to have_content("Nothing changes until you press Save")
+    expect(page).to have_content("You have unsaved changes")
+    expect(page).to have_content("Unsaved changes. Press Save to apply them.")
+    expect(page).to have_no_content("Saved setting: publishing is off")
     shots("filled")
 
     perform_enqueued_jobs { click_on "Save" }

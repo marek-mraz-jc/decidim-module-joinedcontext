@@ -7,6 +7,10 @@
 <div class="item__edit item__edit-1col">
   <div class="item__edit-form">
     <% blocked = targets.empty? || private_space? %>
+    <div id="joinedcontext-unsaved" hidden>
+      <%= cell("decidim/announcement", t(".unsaved"), callout_class: "warning") %>
+    </div>
+    <div id="joinedcontext-state">
     <% if targets.empty? %>
       <%= cell("decidim/announcement", t(".no_endpoints"), callout_class: "warning") %>
     <% elsif private_space? %>
@@ -18,6 +22,7 @@
     <% else %>
       <%= cell("decidim/announcement", t(".state_off"), callout_class: "secondary") %>
     <% end %>
+    </div>
 
     <% unless blocked %>
     <div class="form__wrapper">
@@ -37,7 +42,7 @@
       </div>
     </div>
 
-    <%= decidim_form_for(publication, as: :publication, url: update_path, method: :patch, html: { class: "form form-defaults" }) do |f| %>
+    <%= decidim_form_for(publication, as: :publication, url: update_path, method: :patch, html: { id: "joinedcontext-form", class: "form form-defaults" }) do |f| %>
       <div class="form__wrapper">
         <div class="card pt-4">
           <div class="card-section">
@@ -53,7 +58,7 @@
               <%= hidden_field_tag "publication[component_types][]", "", id: nil %>
               <% Decidim::Joinedcontext::Publication::COMPONENT_TYPES.each do |type| %>
                 <div>
-                  <label>
+                  <label class="flex gap-2 items-start">
                     <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}" %>
                     <%= t(".component_types.#{type}") %>
                   </label>
@@ -68,10 +73,18 @@
       </div>
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
-          <span id="joinedcontext-save-help" class="text-white font-semibold my-auto mr-4"><%= t(".save_help") %></span>
+          <span id="joinedcontext-save-help" class="text-white font-semibold my-auto mr-4" data-unsaved="<%= t(".save_unsaved") %>"><%= t(".save_help") %></span>
           <%= f.submit t(".save"), class: "button button__sm button__secondary", aria: { describedby: "joinedcontext-save-help" } %>
         </div>
       </div>
+    <% end %>
+    <%= javascript_tag nonce: true do %>
+      document.getElementById("joinedcontext-form").addEventListener("change", () => {
+        const help = document.getElementById("joinedcontext-save-help");
+        help.textContent = help.dataset.unsaved;
+        document.getElementById("joinedcontext-state").hidden = true;
+        document.getElementById("joinedcontext-unsaved").hidden = false;
+      }, { once: true });
     <% end %>
     <% end %>
   </div>

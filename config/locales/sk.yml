@@ -38,6 +38,7 @@ sk:
             private_space: Tento priestor je súkromný, preto sa nedá zverejniť. Najprv ho zmeňte na verejný.
             save: Uložiť
             save_help: Nič sa nezmení, kým nestlačíte Uložiť.
+            save_unsaved: Neuložené zmeny. Stlačením Uložiť ich použijete.
             state_off: "Uložené nastavenie: zverejňovanie je vypnuté. Zapnite ho, vyberte Endpoint, zaškrtnite, čo zverejniť, a uložte."
             state_on: Zverejňuje sa do %{target}. Zmeny odídu do minúty.
             status: Stav
@@ -45,6 +46,7 @@ sk:
             sync_help: Pošle všetko hneď, bez čakania na nočnú synchronizáciu. O minútu načítajte stránku znova a uvidíte výsledok.
             sync_now: Synchronizovať teraz
             title: Zverejniť do kontextového priestoru
+            unsaved: Máte neuložené zmeny. Prejavia sa po stlačení Uložiť.
           sync:
             inactive: Najprv zapnite zverejňovanie a vyberte Endpoint.
             success: Synchronizácia je zaradená. O minútu načítajte stránku znova a uvidíte výsledok.
