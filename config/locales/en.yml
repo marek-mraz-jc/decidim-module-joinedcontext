@@ -1,0 +1,58 @@
+---
+en:
+  activemodel:
+    attributes:
+      publication:
+        component_types: What to publish
+        enabled: Publish to context space
+        endpoint_name: Target Endpoint
+  activerecord:
+    errors:
+      models:
+        decidim/joinedcontext/publication:
+          attributes:
+            enabled:
+              private_space: A private space cannot be published. Make it public first.
+            endpoint_name:
+              inclusion: Choose one of the listed Endpoints.
+  decidim:
+    joinedcontext:
+      admin:
+        menu:
+          publication: Publish to context space
+        publications:
+          edit:
+            component_types:
+              accountability: Results and their progress
+              budgets: Budget projects and vote totals (totals only once the budget shows them)
+              meetings: Meetings and their closing reports
+              proposals: Proposals, their published states and answers
+            component_types_help: 'Example: tick Results to share what the process delivered. Only what anonymous visitors can read on the site is sent; authors, comments, e-mail addresses and phone numbers never are.'
+            enabled_help: Sends this space's outputs to the context space on every change, and in full every night. Turned off, nothing more is sent and what was sent leaves the context space within three days.
+            endpoint_name_help: 'The context space that receives the data, for example "Participation". Your platform team sets up this list.'
+            last_count: Records in the last full sync
+            last_error: Last error
+            last_synced_at: Last sync
+            never: Not synced yet
+            no_endpoints: No Endpoint is set up for this installation, so nothing can be published. Ask your platform team to set JOINEDCONTEXT_ENDPOINTS.
+            no_error: None
+            private_space: This space is private, so it cannot be published. Make it public first.
+            save: Save
+            status: Status
+            sync_help: Sends everything now instead of waiting for tonight's sync. The status line updates when it ends; reload the page to read it.
+            sync_now: Sync now
+            title: Publish to context space
+          sync:
+            inactive: Turn publishing on and choose an Endpoint first.
+            success: Sync queued. Reload this page in a minute to read the result.
+          update:
+            error: The setting was not saved. Check the fields below.
+            success: Setting saved.
+      errors:
+        host: The Endpoint is not on the allowed gateway host. Ask your platform team to check JOINEDCONTEXT_GATEWAY_HOST.
+        oversized: The answer from %{host} was too large and was dropped. Tell your platform team.
+        partial: 'The Endpoint refused %{refused} of %{count} records: %{reason}. Check those records, then press Sync now.'
+        refused: 'The Endpoint refused the data (%{code}): %{reason}. Ask your platform team to check its Policy.'
+        token: Sign-in to the platform failed. Ask your platform team to check the service account's client id and secret.
+        unavailable: The platform answered %{code} and is busy or down. The sync retries by itself.
+        unreachable: "%{host} cannot be reached (%{reason}). The sync retries by itself."

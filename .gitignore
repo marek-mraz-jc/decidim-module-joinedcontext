@@ -1,0 +1,6 @@
+.bundle/
+spec/decidim_dummy_app/
+node_modules/
+coverage/
+log/
+tmp/

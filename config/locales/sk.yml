@@ -1,0 +1,58 @@
+---
+sk:
+  activemodel:
+    attributes:
+      publication:
+        component_types: Čo zverejniť
+        enabled: Zverejniť do kontextového priestoru
+        endpoint_name: Cieľový Endpoint
+  activerecord:
+    errors:
+      models:
+        decidim/joinedcontext/publication:
+          attributes:
+            enabled:
+              private_space: Súkromný priestor sa nedá zverejniť. Najprv ho zmeňte na verejný.
+            endpoint_name:
+              inclusion: Vyberte jeden z ponúkaných Endpointov.
+  decidim:
+    joinedcontext:
+      admin:
+        menu:
+          publication: Zverejniť do kontextového priestoru
+        publications:
+          edit:
+            component_types:
+              accountability: Výsledky a ich priebeh
+              budgets: Projekty rozpočtu a súčty hlasov (súčty až keď ich rozpočet ukazuje)
+              meetings: Stretnutia a ich záverečné správy
+              proposals: Návrhy, ich zverejnené stavy a odpovede
+            component_types_help: 'Príklad: zaškrtnite Výsledky a zdieľate, čo proces priniesol. Posiela sa len to, čo anonymný návštevník číta na stránke; autori, komentáre, e-maily a telefónne čísla nikdy.'
+            enabled_help: Pri každej zmene pošle výstupy tohto priestoru do kontextového priestoru a každú noc ich pošle celé. Po vypnutí sa už nič neposiela a poslané údaje z kontextového priestoru zmiznú do troch dní.
+            endpoint_name_help: 'Kontextový priestor, ktorý údaje prijme, napríklad „Participácia“. Tento zoznam nastavuje váš tím platformy.'
+            last_count: Záznamy v poslednej úplnej synchronizácii
+            last_error: Posledná chyba
+            last_synced_at: Posledná synchronizácia
+            never: Zatiaľ nesynchronizované
+            no_endpoints: Pre túto inštaláciu nie je nastavený žiadny Endpoint, takže sa nedá nič zverejniť. Požiadajte tím platformy o nastavenie JOINEDCONTEXT_ENDPOINTS.
+            no_error: Žiadna
+            private_space: Tento priestor je súkromný, preto sa nedá zverejniť. Najprv ho zmeňte na verejný.
+            save: Uložiť
+            status: Stav
+            sync_help: Pošle všetko hneď, bez čakania na nočnú synchronizáciu. Stav sa aktualizuje po skončení; načítajte stránku znova.
+            sync_now: Synchronizovať teraz
+            title: Zverejniť do kontextového priestoru
+          sync:
+            inactive: Najprv zapnite zverejňovanie a vyberte Endpoint.
+            success: Synchronizácia je zaradená. O minútu načítajte stránku znova a uvidíte výsledok.
+          update:
+            error: Nastavenie sa neuložilo. Skontrolujte polia nižšie.
+            success: Nastavenie je uložené.
+      errors:
+        host: Endpoint nie je na povolenom hostiteľovi brány. Požiadajte tím platformy o kontrolu JOINEDCONTEXT_GATEWAY_HOST.
+        oversized: Odpoveď z %{host} bola príliš veľká a bola zahodená. Informujte tím platformy.
+        partial: 'Endpoint odmietol %{refused} z %{count} záznamov: %{reason}. Skontrolujte tieto záznamy a stlačte Synchronizovať teraz.'
+        refused: 'Endpoint údaje odmietol (%{code}): %{reason}. Požiadajte tím platformy o kontrolu jeho Policy.'
+        token: Prihlásenie do platformy zlyhalo. Požiadajte tím platformy o kontrolu client id a tajomstva servisného účtu.
+        unavailable: Platforma odpovedala %{code} a je zaneprázdnená alebo nedostupná. Synchronizácia to skúsi znova sama.
+        unreachable: "%{host} je nedostupný (%{reason}). Synchronizácia to skúsi znova sama."

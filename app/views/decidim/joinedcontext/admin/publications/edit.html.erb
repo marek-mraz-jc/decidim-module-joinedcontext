@@ -1,0 +1,67 @@
+<% add_decidim_page_title(t(".title")) %>
+
+<div class="item_show__header">
+  <h1 class="item_show__header-title"><%= t(".title") %></h1>
+</div>
+
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <% if targets.empty? %>
+      <%= cell("decidim/announcement", t(".no_endpoints"), callout_class: "warning") %>
+    <% elsif private_space? %>
+      <%= cell("decidim/announcement", t(".private_space"), callout_class: "warning") %>
+    <% end %>
+
+    <div class="form__wrapper">
+      <div class="card pt-4">
+        <div class="card-section">
+          <h2 class="h4"><%= t(".status") %></h2>
+          <dl id="joinedcontext-status">
+            <dt><%= t(".last_synced_at") %></dt>
+            <dd><%= publication.last_synced_at ? l(publication.last_synced_at, format: :decidim_short) : t(".never") %></dd>
+            <dt><%= t(".last_count") %></dt>
+            <dd><%= publication.last_count || "-" %></dd>
+            <dt><%= t(".last_error") %></dt>
+            <dd><%= publication.last_error.presence || t(".no_error") %></dd>
+          </dl>
+          <%= button_to t(".sync_now"), sync_path, class: "button button__sm button__secondary", disabled: !publication.active?, aria: { describedby: "joinedcontext-sync-help" } %>
+          <p id="joinedcontext-sync-help" class="help-text"><%= t(".sync_help") %></p>
+        </div>
+      </div>
+    </div>
+
+    <%= decidim_form_for(publication, as: :publication, url: publication_path, method: :patch, html: { class: "form form-defaults" }) do |f| %>
+      <div class="form__wrapper">
+        <div class="card pt-4">
+          <div class="card-section">
+            <div class="row column">
+              <%= f.check_box :enabled, disabled: targets.empty? || private_space?, help_text: t(".enabled_help") %>
+            </div>
+            <div class="row column">
+              <%= f.select :endpoint_name, targets.map { |target| [target.title, target.name] }, { include_blank: true, help_text: t(".endpoint_name_help") }, { disabled: targets.empty? } %>
+            </div>
+            <fieldset class="row column" aria-describedby="joinedcontext-types-help">
+              <legend><%= t("activemodel.attributes.publication.component_types") %></legend>
+              <%= hidden_field_tag "publication[component_types][]", "", id: nil %>
+              <% Decidim::Joinedcontext::Publication::COMPONENT_TYPES.each do |type| %>
+                <label>
+                  <%= check_box_tag "publication[component_types][]", type, publication.component_types.include?(type), id: "publication_component_types_#{type}" %>
+                  <%= t(".component_types.#{type}") %>
+                </label>
+              <% end %>
+              <p id="joinedcontext-types-help" class="help-text"><%= t(".component_types_help") %></p>
+              <% if publication.errors[:component_types].any? %>
+                <p class="form-error is-visible"><%= publication.errors.full_messages_for(:component_types).to_sentence %></p>
+              <% end %>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="item__edit-sticky">
+        <div class="item__edit-sticky-container">
+          <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
