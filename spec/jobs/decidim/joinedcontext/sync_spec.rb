@@ -32,7 +32,10 @@ describe "publishing" do
     it "never sends a record in the batch of the entity it names: the gateway reads targets from the store" do
       child = create(:result, component:, parent: result)
       batches = []
-      stub_request(:post, JoinedcontextHelpers::UPSERT).to_return { |request| batches << JSON.parse(request.body).pluck("id") && { status: 204 } }
+      stub_request(:post, JoinedcontextHelpers::UPSERT).to_return do |request|
+        batches << JSON.parse(request.body).pluck("id")
+        { status: 204 }
+      end
       described_class.perform_now(publication.id)
       mapper = Decidim::Joinedcontext::Mapper.new(publication)
       expect(batches).to eq([[mapper.entity_id(process)], [mapper.entity_id(result)], [mapper.entity_id(child)]])
